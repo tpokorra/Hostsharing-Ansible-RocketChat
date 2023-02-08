@@ -1,9 +1,10 @@
 DirectoryIndex disabled
 RewriteEngine On
+RewriteBase /
 RewriteCond %{HTTP:CONNECTION} Upgrade [NC]
 RewriteCond %{HTTP:Upgrade} =websocket [NC]
-RewriteRule /(.*)           ws://localhost:{{rocketchat_port}}/$1 [P,L]
+RewriteRule ^(.*)$          ws://localhost:{{rocketchat_port}}/$1 [P,L]
 RewriteCond %{HTTP:Upgrade} !=websocket [NC]
-RewriteRule /(.*)           http://localhost:{{rocketchat_port}}/$1 [P,L]
+RewriteRule ^(.*)$          http://localhost:{{rocketchat_port}}/$1 [proxy,last]
 
-ProxyPassReverse /          http://localhost:{{rocketchat_port}}/
+#ProxyPassReverse /          http://localhost:{{rocketchat_port}}/
