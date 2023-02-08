@@ -14,6 +14,8 @@ rocketchat:
 
       # see https://github.com/mongodb/mongo/tags and Rocket.Chat/releases
       mongodb_version: "5.0.14"
+      # see https://www.mongodb.com/try/download/shell
+      mongoshell_version: "1.6.2"
 
       # see https://github.com/RocketChat/Rocket.Chat/releases
       rocketchat_version: "5.4.2"
