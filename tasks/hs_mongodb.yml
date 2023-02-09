@@ -37,6 +37,22 @@
     dest: "/home/pacs/{{pac}}/users/{{user}}/bin/mongod"
     mode: '0700'
 
+- name: copy mongo binary
+  become: yes
+  become_user: "{{pac}}-{{user}}"
+  copy:
+    src: "/home/pacs/{{pac}}/users/{{user}}/var/tmp/mongodb-linux-x86_64-debian10-{{mongodb_version}}/bin/mongo"
+    remote_src: yes
+    dest: "/home/pacs/{{pac}}/users/{{user}}/bin/mongo"
+    mode: '0700'
+
+- name: clear downloaded mongo directory in tmp
+  become: yes
+  become_user: "{{pac}}-{{user}}"
+  file:
+    path: "/home/pacs/{{pac}}/users/{{user}}/var/tmp/mongodb-linux-x86_64-debian10-{{mongodb_version}}"
+    state: absent
+
 - name: upload mongod configuration file
   become: yes
   become_user: "{{pac}}-{{user}}"

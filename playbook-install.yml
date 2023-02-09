@@ -59,21 +59,12 @@
   - name: Install mongodb
     import_tasks: tasks/hs_mongodb.yml
 
-  - name: download mongo shell
-    become: yes
-    unarchive:
-      src: https://downloads.mongodb.com/compass/mongosh-{{mongoshell_version}}-linux-x64.tgz
-      remote_src: yes
-      dest: /home/pacs/{{pac}}/users/{{user}}/bin
-      extra_opts: [--strip-components=2]
-      creates: /home/pacs/{{pac}}/users/{{user}}/bin/mongosh
-
   - name: start mongodb and initialise replica set
     become: yes
     shell: |
       ./mongod-start.sh || exit -1
       sleep 10
-      ./mongosh mongodb://127.0.0.1:{{mongod_port}} --eval "printjson(rs.initiate({ _id: 'rs01', members: [ { _id: 0, host: '127.0.0.1:{{mongod_port}}' } ]}))"
+      ./mongo mongodb://127.0.0.1:{{mongod_port}} --eval "printjson(rs.initiate({ _id: 'rs01', members: [ { _id: 0, host: '127.0.0.1:{{mongod_port}}' } ]}))"
     args:
       executable: /bin/bash
       chdir: "/home/pacs/{{pac}}/users/{{user}}/bin"
