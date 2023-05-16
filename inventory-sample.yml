@@ -16,7 +16,7 @@ rocketchat:
       mongodb_version: "5.0.15"
 
       # see https://github.com/RocketChat/Rocket.Chat/releases
-      rocketchat_version: "5.4.5"
+      rocketchat_version: "5.4.9"
 
       # see https://github.com/RocketChat/Rocket.Chat/releases
       noderelease: 14
